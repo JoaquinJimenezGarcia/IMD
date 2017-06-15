@@ -26,13 +26,12 @@ public class Participante {
         this.setEdad(0);
     }
 
-    public Participante(int dorsal, Sexo sexo, String nombreCompleto, String nacionalidad, String club, Categoria categoria, int edad) {
+    public Participante(int dorsal, Sexo sexo, String nombreCompleto, String nacionalidad, String club, int edad) {
         this.setDorsal(dorsal);
         this.setSexo(sexo);
         this.setNombreCompleto(nombreCompleto);
         this.setNacionalidad(nacionalidad);
         this.setClub(club);
-        this.setCategoria(categoria);
         this.setEdad(edad);
     }
 
@@ -71,8 +70,8 @@ public class Participante {
     public void setNacionalidad(String nacionalidad) {
         Scanner input = new Scanner(System.in);
 
-        if (nacionalidad.length()>2 || nacionalidad.equals("")){
-            System.out.println("Nacionalidad incorrecta. Asegúrese que solo conste de dos caracteres");
+        if (nacionalidad.length()>3 || nacionalidad.equals("")){
+            System.out.println("Nacionalidad incorrecta. Asegúrese que solo conste de tres caracteres: ");
             nacionalidad = input.nextLine();
             setNacionalidad(nacionalidad);
         } else {

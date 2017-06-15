@@ -1,7 +1,9 @@
 package controller;
 
+import model.Categoria;
 import model.Gestor;
 import model.Participante;
+import model.Sexo;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -87,15 +89,58 @@ public class GestorApp {
         return showMenu();
     }
 
+    public Participante leerAtleta(){
+        Scanner input = new Scanner(System.in);
+        int option;
+
+        int dorsal;
+        Sexo sexo;
+        String nombreCompleto;
+        String nacionalidad;
+        String club;
+        int edad;
+
+        System.out.println("Introduzca dorsal: ");
+        dorsal = input.nextInt();
+
+        do {
+            System.out.println("Introduzca sexo: ");
+            System.out.println("1. Hombre");
+            System.out.println("2. Mujer");
+            option = input.nextInt();
+        } while (option!=1 && option != 2);
+
+        if (option ==1){
+            sexo = Sexo.HOMBRE;
+        } else {
+            sexo = Sexo.MUJER;
+        }
+
+        input.nextLine();
+
+        System.out.println("Inserte el nombre: ");
+        nombreCompleto = input.nextLine();
+
+        System.out.println("Inserte la nacionalidad (formato de tres letras): ");
+        nacionalidad = input.next();
+
+        input.nextLine();
+
+        System.out.println("Inserte el club: ");
+        club = input.nextLine();
+
+        System.out.println("Indique el año de nacimiento: ");
+        edad = input.nextInt();
+
+        return new Participante(dorsal,sexo, nombreCompleto, nacionalidad, club, edad);
+
+    }
+
     private int getIdentificador(){
         Scanner input = new Scanner(System.in);
 
         System.out.print("Dorsal: ");
         return input.nextInt();
-    }
-
-    private Participante leerAtleta(){
-        return null;
     }
 
 }
