@@ -98,7 +98,7 @@ public class GestorApp {
         String nombreCompleto;
         String nacionalidad;
         String club;
-        int edad;
+        int fechaNacimiento;
 
         System.out.println("Introduzca dorsal: ");
         dorsal = input.nextInt();
@@ -130,9 +130,9 @@ public class GestorApp {
         club = input.nextLine();
 
         System.out.println("Indique el año de nacimiento: ");
-        edad = input.nextInt();
+        fechaNacimiento = input.nextInt();
 
-        return new Participante(dorsal,sexo, nombreCompleto, nacionalidad, club, edad);
+        return new Participante(dorsal,sexo, nombreCompleto, nacionalidad, club, fechaNacimiento);
 
     }
 

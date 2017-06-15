@@ -22,7 +22,7 @@ public class Gestor {
     public void registarCliente(Participante participante) {
         if (participantes.contains(participante)) {
             participante = null;
-            System.out.println("Ya hay un cliente con este dorsal");
+            System.out.println("Ya hay un participante con este dorsal");
         }
 
         if (participante != null) {
@@ -56,7 +56,7 @@ public class Gestor {
     }
 
     /**
-     * Escribirá la lista actual de clientes en info/clientesRegistrados.dat
+     * Escribirá la lista actual de clientes en info/participantes.dat
      */
     public void guardarParticipantes() {
         try {
@@ -71,11 +71,11 @@ public class Gestor {
     }
 
     /**
-     * Cargará la lista guardada de clientes en info/clientesPendientes.dat
+     * Cargará la lista guardada de clientes en info/participantes.dat
      */
     public void cargarParticipantes(){
         try {
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("info/clientesRegistrados.dat"));
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("info/participantes.dat"));
 
             participantes = (ArrayList<Participante>) ois.readObject();
 

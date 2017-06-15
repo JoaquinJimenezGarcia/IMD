@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Comparator;
 import java.util.Objects;
 import java.util.Scanner;
@@ -7,7 +8,8 @@ import java.util.Scanner;
 /**
  * Created by garci on 14/06/2017.
  */
-public class Participante {
+public class Participante implements Serializable{
+    private static final long serialVersionUID = -6152922877399682638L;
     private int dorsal;
     private Sexo sexo;
     private String nombreCompleto;
@@ -15,6 +17,7 @@ public class Participante {
     private String club;
     private Categoria categoria;
     private int edad;
+    private int fechaNacimiento;
 
     public Participante() {
         this.setDorsal(0);
@@ -22,17 +25,27 @@ public class Participante {
         this.setNombreCompleto("NS/NC");
         this.setNacionalidad("NSC");
         this.setClub("Indepentiente");
-        this.setCategoria(Categoria.JUNIOR);
-        this.setEdad(0);
+        this.setCategoria();
+        this.setEdad(18);
     }
 
-    public Participante(int dorsal, Sexo sexo, String nombreCompleto, String nacionalidad, String club, int edad) {
+    public Participante(int dorsal, Sexo sexo, String nombreCompleto, String nacionalidad, String club, int fechaNacimiento) {
         this.setDorsal(dorsal);
         this.setSexo(sexo);
         this.setNombreCompleto(nombreCompleto);
         this.setNacionalidad(nacionalidad);
         this.setClub(club);
-        this.setEdad(edad);
+        this.setFechaNacimiento(fechaNacimiento);
+        this.setCategoria();
+    }
+
+    public int getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(int fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+        this.edad = calcularEdad();
     }
 
     public Sexo getSexo() {
@@ -47,8 +60,23 @@ public class Participante {
         return categoria;
     }
 
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
+    public void setCategoria() {
+        //this.categoria = categoria;
+        if (this.fechaNacimiento == 2000 || this.fechaNacimiento == 1999) {
+            this.categoria = Categoria.JUNIOR;
+        } else if (this.fechaNacimiento >= 1996 && this.fechaNacimiento <= 1998){
+            this.categoria = Categoria.PROMESA;
+        } else if (this.fechaNacimiento <= 1995 && this.edad < 35 ){
+            this.categoria = Categoria.SENIOR;
+        } else if (this.edad <= 45 && this.edad >= 35){
+            this.categoria = Categoria.VETERANO1;
+        } else if (this.edad <= 46 && this.edad >= 55) {
+            this.categoria =  Categoria.VETERANO2;
+        } else if (this.edad >= 56 && this.edad <= 65) {
+            this.categoria =  Categoria.VETERANO3;
+        } else {
+            this.categoria =  Categoria.SUPER_SENIOR;
+        }
     }
 
     public String getClub() {
@@ -101,6 +129,10 @@ public class Participante {
 
     public void setEdad(int edad) {
         this.edad = edad;
+    }
+
+    public int calcularEdad(){
+       return 2017 - getFechaNacimiento();
     }
 
     /**
