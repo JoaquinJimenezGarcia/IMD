@@ -35,11 +35,30 @@ public class Gestor {
         return participantes.size();
     }
 
-    public void consultarClasificaciones(){
+    public void consultarClasificaciones(int opcion){
+        String sexo;
+        Sexo sexoGenero;
+        int indice = 0;
+
+        if (opcion == 1){
+            sexo = "hombres";
+            sexoGenero = Sexo.HOMBRE;
+        } else {
+            sexo = "mujeres";
+            sexoGenero = Sexo.MUJER;
+        }
+
         Collections.sort(participantes,Participante.comparadorPorDorsal);
 
+        System.out.println("# Clasificación general " + sexo);
+        System.out.println("#POS DORSAL NOMBRE A TIEMPO");
+        System.out.println("==============================================");
+
         for (Participante participante : participantes) {
-            System.out.println(participante);
+            if (participante.getSexo().equals(sexoGenero)) {
+                indice++;
+                System.out.println(indice + " - " + participante);
+            }
         }
     }
 

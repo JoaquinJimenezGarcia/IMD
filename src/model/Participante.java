@@ -147,15 +147,7 @@ public class Participante implements Serializable{
 
     @Override
     public String toString() {
-        return "Participante{" +
-                "dorsal=" + dorsal +
-                ", sexo='" + sexo + '\'' +
-                ", nombreCompleto='" + nombreCompleto + '\'' +
-                ", nacionalidad='" + nacionalidad + '\'' +
-                ", club='" + club + '\'' +
-                ", categoria='" + categoria + '\'' +
-                ", edad=" + edad +
-                '}';
+        return this.dorsal + " - " + this.nombreCompleto;
     }
 
     @Override

@@ -30,7 +30,7 @@ public class GestorApp {
                     break;
                 case 2:
                     if (gestor.longitud() > 0) {
-                        gestor.consultarClasificaciones();
+                        gestor.consultarClasificaciones(consultarGenero());
                     }
                     break;
                 case 3:
@@ -52,6 +52,20 @@ public class GestorApp {
                     break;
             }
         }
+    }
+
+    private int consultarGenero(){
+        Scanner input = new Scanner(System.in);
+        int opcion;
+
+        do {
+            System.out.println("Introduzca sexo: ");
+            System.out.println("1. Hombre");
+            System.out.println("2. Mujer");
+            opcion = input.nextInt();
+        } while (opcion!=1 && opcion != 2);
+
+        return opcion;
     }
 
     /**
@@ -91,7 +105,6 @@ public class GestorApp {
 
     public Participante leerAtleta(){
         Scanner input = new Scanner(System.in);
-        int option;
 
         int dorsal;
         Sexo sexo;
@@ -103,14 +116,7 @@ public class GestorApp {
         System.out.println("Introduzca dorsal: ");
         dorsal = input.nextInt();
 
-        do {
-            System.out.println("Introduzca sexo: ");
-            System.out.println("1. Hombre");
-            System.out.println("2. Mujer");
-            option = input.nextInt();
-        } while (option!=1 && option != 2);
-
-        if (option ==1){
+        if (consultarGenero() ==1){
             sexo = Sexo.HOMBRE;
         } else {
             sexo = Sexo.MUJER;
