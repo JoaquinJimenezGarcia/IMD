@@ -150,6 +150,21 @@ public class Participante implements Serializable{
         return this.dorsal + " - " + this.nombreCompleto;
     }
 
+    public String toStringIndividual(){
+        return
+                "INFORMACIÓN SOBRE ATLETA \n" +
+                "================================= \n" +
+                "Nombre: " + this.getNombreCompleto() + "\n" +
+                "Dorsal: " + this.getDorsal() + "\n" +
+                "Club: " + this.getClub() + "\n" +
+                "Nacionalidad: " + this.getNacionalidad().toUpperCase() + "\n" +
+                "Sexo: " + this.getSexo() + "\n" +
+                "Tiempo Oficial: " + this.getNombreCompleto() + "\n" +
+                "Posición General: " + this.getNombreCompleto() + "\n" +
+                "Posición Categoría: " + this.getNombreCompleto() + "\n";
+
+    }
+
     @Override
     public boolean equals(Object obj) {
         // Self check

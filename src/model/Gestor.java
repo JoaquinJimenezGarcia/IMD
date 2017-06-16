@@ -66,7 +66,7 @@ public class Gestor {
     public void consultarAtleta(int dorsal){
         for (Participante p: participantes) {
             if (p.getDorsal() == dorsal) {
-                System.out.println(p);
+                System.out.println(p.toStringIndividual());
             }
         }
     }
