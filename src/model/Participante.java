@@ -1,7 +1,11 @@
 package model;
 
 import java.io.Serializable;
+import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -10,6 +14,9 @@ import java.util.Scanner;
  */
 public class Participante implements Serializable{
     private static final long serialVersionUID = -6152922877399682638L;
+    private SimpleDateFormat formatoTiempo = new SimpleDateFormat("HH:mm:ss");
+    Date tiempoCorrectoConFecha;
+    private String tiempo;
     private int dorsal;
     private Sexo sexo;
     private String nombreCompleto;
@@ -27,9 +34,11 @@ public class Participante implements Serializable{
         this.setClub("Indepentiente");
         this.setCategoria();
         this.setEdad(18);
+        this.setTiempo("00:00:00");
+        this.setTiempoCorrectoConFecha();
     }
 
-    public Participante(int dorsal, Sexo sexo, String nombreCompleto, String nacionalidad, String club, int fechaNacimiento) {
+    public Participante(int dorsal, Sexo sexo, String nombreCompleto, String nacionalidad, String club, int fechaNacimiento, String tiempo) {
         this.setDorsal(dorsal);
         this.setSexo(sexo);
         this.setNombreCompleto(nombreCompleto);
@@ -37,6 +46,37 @@ public class Participante implements Serializable{
         this.setClub(club);
         this.setFechaNacimiento(fechaNacimiento);
         this.setCategoria();
+        this.setTiempo(tiempo);
+        this.setTiempoCorrectoConFecha();
+    }
+
+    public Date getTiempoCorrectoConFecha() {
+        return tiempoCorrectoConFecha;
+    }
+
+    public Time getTiempoCorrecto(){
+
+        long lnMilisegundos = tiempoCorrectoConFecha.getTime();
+        Time tiempoCorrecto = new java.sql.Time(lnMilisegundos);
+
+        return tiempoCorrecto;
+    }
+
+    public void setTiempoCorrectoConFecha() {
+        try {
+            this.tiempoCorrectoConFecha = formatoTiempo.parse(tiempo);
+        } catch (ParseException e) {
+            System.out.println("Ha introducido un tiempo incorrecto.");
+        }
+
+    }
+
+    public String getTiempo() {
+        return tiempo;
+    }
+
+    public void setTiempo(String tiempo) {
+        this.tiempo = tiempo;
     }
 
     public int getFechaNacimiento() {
@@ -159,9 +199,9 @@ public class Participante implements Serializable{
                 "Club: " + this.getClub() + "\n" +
                 "Nacionalidad: " + this.getNacionalidad().toUpperCase() + "\n" +
                 "Sexo: " + this.getSexo() + "\n" +
-                "Tiempo Oficial: " + this.getNombreCompleto() + "\n" +
-                "Posición General: " + this.getNombreCompleto() + "\n" +
-                "Posición Categoría: " + this.getNombreCompleto() + "\n";
+                "Tiempo Oficial: [" + this.getTiempoCorrecto() +  "] \n" +
+                "Posición General: [a: " + this.getNombreCompleto() + "] \n" +
+                "Posición Categoría: [a: " + this.getNombreCompleto() + "] \n";
 
     }
 

@@ -80,12 +80,17 @@ public class Gestor {
 
         while (itParticipante.hasNext()){
             Participante participante = itParticipante.next();
+            String comprobador = null;
 
             try {
                 if (participante.getDorsal() == dorsal) {
                     itParticipante.remove();
                     guardarParticipantes();
-                } else {
+                    comprobador = "";
+                    System.out.println("Participante " + participante.getNombreCompleto() + " borrado con éxito.");
+                }
+
+                if (comprobador == null){
                     System.out.println("El atleta no existe.");
                 }
             } catch (NullPointerException e) {

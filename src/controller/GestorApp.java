@@ -112,6 +112,7 @@ public class GestorApp {
         String nacionalidad;
         String club;
         int fechaNacimiento;
+        String marcaRealizada;
 
         System.out.println("Introduzca dorsal: ");
         dorsal = input.nextInt();
@@ -138,7 +139,12 @@ public class GestorApp {
         System.out.println("Indique el año de nacimiento: ");
         fechaNacimiento = input.nextInt();
 
-        return new Participante(dorsal,sexo, nombreCompleto, nacionalidad, club, fechaNacimiento);
+        input.nextLine();
+
+        System.out.println("Marca realizada: ");
+        marcaRealizada = input.nextLine();
+
+        return new Participante(dorsal,sexo, nombreCompleto, nacionalidad, club, fechaNacimiento, marcaRealizada);
 
     }
 
