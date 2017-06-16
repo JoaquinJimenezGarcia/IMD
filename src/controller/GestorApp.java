@@ -82,7 +82,7 @@ public class GestorApp {
         if (gestor.longitud()>0) {
             System.out.println("* 2. Consultar clasificaciones   *");
             System.out.println("* 3. Consultar info atleta       *");
-            System.out.println("* 4. Editar inf atleta           *");
+            System.out.println("* 4. Editar info atleta          *");
             System.out.println("* 5. Borrar Atleta               *");
         }
         System.out.println("* 0. Salir                       *");
@@ -124,7 +124,7 @@ public class GestorApp {
 
         input.nextLine();
 
-        System.out.println("Inserte el nombre: ");
+        System.out.println("Inserte el nombre con apellidos: ");
         nombreCompleto = input.nextLine();
 
         System.out.println("Inserte la nacionalidad (formato de tres letras): ");

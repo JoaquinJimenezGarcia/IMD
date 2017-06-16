@@ -3,6 +3,7 @@ package model;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 
 /**
  * Created by garci on 14/06/2017.
@@ -63,7 +64,11 @@ public class Gestor {
     }
 
     public void consultarAtleta(int dorsal){
-
+        for (Participante p: participantes) {
+            if (p.getDorsal() == dorsal) {
+                System.out.println(p);
+            }
+        }
     }
 
     public void editarAtleta(int dorsal){
@@ -71,6 +76,22 @@ public class Gestor {
     }
 
     public void borrarAtleta(int dorsal) {
+        Iterator<Participante> itParticipante = participantes.iterator();
+
+        while (itParticipante.hasNext()){
+            Participante participante = itParticipante.next();
+
+            try {
+                if (participante.getDorsal() == dorsal) {
+                    itParticipante.remove();
+                    guardarParticipantes();
+                } else {
+                    System.out.println("El atleta no existe.");
+                }
+            } catch (NullPointerException e) {
+                System.out.println("El atleta no existe.");
+            }
+        }
 
     }
 
