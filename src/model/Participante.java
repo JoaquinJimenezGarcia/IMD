@@ -25,6 +25,8 @@ public class Participante implements Serializable{
     private Categoria categoria;
     private int edad;
     private int fechaNacimiento;
+    private Time posicionGeneral;
+    private int posicionNumeroGeneral;
 
     public Participante() {
         this.setDorsal(0);
@@ -48,6 +50,22 @@ public class Participante implements Serializable{
         this.setCategoria();
         this.setTiempo(tiempo);
         this.setTiempoCorrectoConFecha();
+    }
+
+    public int getPosicionNumeroGeneral() {
+        return posicionNumeroGeneral;
+    }
+
+    public void setPosicionNumeroGeneral(int posicionNumeroGeneral) {
+        this.posicionNumeroGeneral = posicionNumeroGeneral;
+    }
+
+    public Time getPosicionGeneral() {
+        return posicionGeneral;
+    }
+
+    public void setPosicionGeneral(Time posicionCategoria) {
+        this.posicionGeneral = posicionCategoria;
     }
 
     public Date getTiempoCorrectoConFecha() {
@@ -187,7 +205,7 @@ public class Participante implements Serializable{
 
     @Override
     public String toString() {
-        return this.dorsal + " - " + this.nombreCompleto;
+        return this.dorsal + " - " + this.nombreCompleto + " - " + this.getTiempoCorrecto();
     }
 
     public String toStringIndividual(){
@@ -200,7 +218,7 @@ public class Participante implements Serializable{
                 "Nacionalidad: " + this.getNacionalidad().toUpperCase() + "\n" +
                 "Sexo: " + this.getSexo() + "\n" +
                 "Tiempo Oficial: [" + this.getTiempoCorrecto() +  "] \n" +
-                "Posición General: [a: " + this.getNombreCompleto() + "] \n" +
+                "Posición General: #" +this.getPosicionNumeroGeneral() + " (a: " + this.getPosicionGeneral() + ") \n" +
                 "Posición Categoría: [a: " + this.getNombreCompleto() + "] \n";
 
     }
@@ -219,6 +237,6 @@ public class Participante implements Serializable{
         // Field comparaison
         Participante participante = (Participante) obj;
         return
-                Objects.equals(this.dorsal, participante.dorsal);
+                Objects.equals(this.getTiempoCorrecto(), participante.getTiempoCorrecto());
     }
 }

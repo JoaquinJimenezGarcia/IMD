@@ -35,6 +35,7 @@ public class GestorApp {
                     break;
                 case 3:
                     if (gestor.longitud() > 0) {
+                        gestor.obtenerPosicionGeneral();
                         gestor.consultarAtleta(getIdentificador());
                     }
                     break;

@@ -1,6 +1,7 @@
 package model;
 
 import java.io.*;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -28,6 +29,7 @@ public class Gestor {
 
         if (participante != null) {
             participantes.add(participante);
+            Collections.sort(participantes,Participante.comparadorPorDorsal);
             guardarParticipantes();
         }
     }
@@ -98,6 +100,22 @@ public class Gestor {
             }
         }
 
+    }
+
+    public void obtenerPosicionGeneral(){
+        for (int i = 0; i < participantes.size(); i++) {
+            try {
+                long tiempoAnterior = participantes.get(i - 1).getTiempoCorrecto().getTime();
+                long tiempoActual = participantes.get(i).getTiempoCorrecto().getTime();
+                long diferiencia = tiempoActual - tiempoAnterior;
+                Time tiempoCorrecto = new java.sql.Time(diferiencia);
+
+                participantes.get(i).setPosicionGeneral(tiempoCorrecto);
+                participantes.get(i).setPosicionNumeroGeneral(i+1);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                participantes.get(i).setPosicionNumeroGeneral(i+1);
+            }
+        }
     }
 
     /**
