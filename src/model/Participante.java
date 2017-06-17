@@ -209,17 +209,31 @@ public class Participante implements Serializable{
     }
 
     public String toStringIndividual(){
-        return
-                "INFORMACIÓN SOBRE ATLETA \n" +
-                "================================= \n" +
-                "Nombre: " + this.getNombreCompleto() + "\n" +
-                "Dorsal: " + this.getDorsal() + "\n" +
-                "Club: " + this.getClub() + "\n" +
-                "Nacionalidad: " + this.getNacionalidad().toUpperCase() + "\n" +
-                "Sexo: " + this.getSexo() + "\n" +
-                "Tiempo Oficial: [" + this.getTiempoCorrecto() +  "] \n" +
-                "Posición General: #" +this.getPosicionNumeroGeneral() + " (a: " + this.getPosicionGeneral() + ") \n" +
-                "Posición Categoría: [a: " + this.getNombreCompleto() + "] \n";
+        if (posicionGeneral != null) {
+            return
+                    "INFORMACIÓN SOBRE ATLETA \n" +
+                            "================================= \n" +
+                            "Nombre: " + this.getNombreCompleto() + "\n" +
+                            "Dorsal: " + this.getDorsal() + "\n" +
+                            "Club: " + this.getClub() + "\n" +
+                            "Nacionalidad: " + this.getNacionalidad().toUpperCase() + "\n" +
+                            "Sexo: " + this.getSexo() + "\n" +
+                            "Tiempo Oficial: [" + this.getTiempoCorrecto() + "] \n" +
+                            "Posición General: #" + this.getPosicionNumeroGeneral() + " (a: " + this.getPosicionGeneral() + ") \n" +
+                            "Posición Categoría: [a: " + this.getNombreCompleto() + "] \n";
+        } else {
+            return
+                    "INFORMACIÓN SOBRE ATLETA \n" +
+                            "================================= \n" +
+                            "Nombre: " + this.getNombreCompleto() + "\n" +
+                            "Dorsal: " + this.getDorsal() + "\n" +
+                            "Club: " + this.getClub() + "\n" +
+                            "Nacionalidad: " + this.getNacionalidad().toUpperCase() + "\n" +
+                            "Sexo: " + this.getSexo() + "\n" +
+                            "Tiempo Oficial: [" + this.getTiempoCorrecto() + "] \n" +
+                            "Posición General: #" + this.getPosicionNumeroGeneral() + " \n" +
+                            "Posición Categoría: [a: " + this.getNombreCompleto() + "] \n";
+        }
 
     }
 

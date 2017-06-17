@@ -16,6 +16,9 @@ public class GestorApp {
 
     public GestorApp(){
         gestor = new Gestor();
+
+        gestor.registarAtleta(new Participante(12,Sexo.HOMBRE, "Joaquin", "ESP", "Marta", 1997, "00:28:00"));
+        gestor.registarAtleta(new Participante(10,Sexo.MUJER, "Marta", "ESP", "Juaki", 1993, "00:25:00"));
     }
 
     public void run() {
@@ -26,7 +29,7 @@ public class GestorApp {
         while ((option = showMenu()) != 0) {
             switch (option) {
                 case 1:
-                    gestor.registarCliente(leerAtleta());
+                    gestor.registarAtleta(leerAtleta());
                     break;
                 case 2:
                     if (gestor.longitud() > 0) {

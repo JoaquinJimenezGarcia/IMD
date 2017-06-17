@@ -21,7 +21,7 @@ public class Gestor {
      * Lo verificará por su dni/nif
      * @param participante
      */
-    public void registarCliente(Participante participante) {
+    public void registarAtleta(Participante participante) {
         if (participantes.contains(participante)) {
             participante = null;
             System.out.println("Ya hay un participante con este dorsal");
@@ -104,15 +104,18 @@ public class Gestor {
 
     public void obtenerPosicionGeneral(){
         for (int i = 0; i < participantes.size(); i++) {
-            try {
-                long tiempoAnterior = participantes.get(i - 1).getTiempoCorrecto().getTime();
+            if (!participantes.get(i).equals(participantes.get(0))) {
+                long tiempoAnterior = participantes.get(0).getTiempoCorrecto().getTime();
                 long tiempoActual = participantes.get(i).getTiempoCorrecto().getTime();
                 long diferiencia = tiempoActual - tiempoAnterior;
+
+                System.out.println(diferiencia);
                 Time tiempoCorrecto = new java.sql.Time(diferiencia);
+                System.out.println(tiempoCorrecto);
 
                 participantes.get(i).setPosicionGeneral(tiempoCorrecto);
                 participantes.get(i).setPosicionNumeroGeneral(i+1);
-            } catch (ArrayIndexOutOfBoundsException e) {
+            } else {
                 participantes.get(i).setPosicionNumeroGeneral(i+1);
             }
         }
