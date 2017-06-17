@@ -19,6 +19,10 @@ public class GestorApp {
 
         gestor.registarAtleta(new Participante(12,Sexo.HOMBRE, "Joaquin", "ESP", "Marta", 1997, "00:28:00"));
         gestor.registarAtleta(new Participante(10,Sexo.MUJER, "Marta", "ESP", "Juaki", 1993, "00:25:00"));
+        gestor.registarAtleta(new Participante(9,Sexo.MUJER, "Carmen", "ESP", "", 1994, "00:27:00"));
+        gestor.registarAtleta(new Participante(66,Sexo.MUJER, "Nadia", "ESP", "", 1990, "00:26:00"));
+        gestor.registarAtleta(new Participante(24,Sexo.HOMBRE, "Jorge", "ESP", "", 1999, "00:24:00"));
+        gestor.registarAtleta(new Participante(99,Sexo.HOMBRE, "Pepe", "ESP", "", 1980, "00:30:00"));
     }
 
     public void run() {
@@ -33,12 +37,14 @@ public class GestorApp {
                     break;
                 case 2:
                     if (gestor.longitud() > 0) {
+                        gestor.obtenerPosicionCategoria();
                         gestor.consultarClasificaciones(consultarGenero());
                     }
                     break;
                 case 3:
                     if (gestor.longitud() > 0) {
                         gestor.obtenerPosicionGeneral();
+                        gestor.obtenerPosicionCategoria();
                         gestor.consultarAtleta(getIdentificador());
                     }
                     break;

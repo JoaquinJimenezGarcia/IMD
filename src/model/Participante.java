@@ -27,6 +27,8 @@ public class Participante implements Serializable{
     private int fechaNacimiento;
     private Time posicionGeneral;
     private int posicionNumeroGeneral;
+    private Time posicionCategoria;
+    private int posicionNumeroCategoria;
 
     public Participante() {
         this.setDorsal(0);
@@ -50,6 +52,22 @@ public class Participante implements Serializable{
         this.setCategoria();
         this.setTiempo(tiempo);
         this.setTiempoCorrectoConFecha();
+    }
+
+    public Time getPosicionCategoria() {
+        return posicionCategoria;
+    }
+
+    public void setPosicionCategoria(Time posicionCategoria) {
+        this.posicionCategoria = posicionCategoria;
+    }
+
+    public int getPosicionNumeroCategoria() {
+        return posicionNumeroCategoria;
+    }
+
+    public void setPosicionNumeroCategoria(int posicionNumeroCategoria) {
+        this.posicionNumeroCategoria = posicionNumeroCategoria;
     }
 
     public int getPosicionNumeroGeneral() {
@@ -196,16 +214,21 @@ public class Participante implements Serializable{
     /**
      * Comparador que comparará los participantes para poder ordenarlos por dorsal.
      */
-    public static Comparator<Participante> comparadorPorDorsal = new Comparator<Participante>() {
+    public static Comparator<Participante> comparadorPorTiempo = new Comparator<Participante>() {
+
         @Override
         public int compare(Participante p1, Participante p2) {
-            return  p1.getDorsal() - (p2.getDorsal());
+            return  p1.getTiempoCorrectoConFecha().compareTo(p2.getTiempoCorrectoConFecha());
         }
     };
 
     @Override
     public String toString() {
-        return this.dorsal + " - " + this.nombreCompleto + " - " + this.getTiempoCorrecto();
+        if (this.getPosicionCategoria() != null) {
+            return this.dorsal + " - " + this.nombreCompleto + " - " + "(a " + this.getPosicionCategoria() + ")" + " - " + this.getTiempoCorrecto();
+        } else {
+            return this.dorsal + " - " + this.nombreCompleto + " - " + this.getTiempoCorrecto();
+        }
     }
 
     public String toStringIndividual(){
@@ -220,7 +243,7 @@ public class Participante implements Serializable{
                             "Sexo: " + this.getSexo() + "\n" +
                             "Tiempo Oficial: [" + this.getTiempoCorrecto() + "] \n" +
                             "Posición General: #" + this.getPosicionNumeroGeneral() + " (a: " + this.getPosicionGeneral() + ") \n" +
-                            "Posición Categoría: [a: " + this.getNombreCompleto() + "] \n";
+                            "Posición Categoría: #" + this.getPosicionNumeroCategoria() + " (a: " + this.getPosicionCategoria() + ") \n";
         } else {
             return
                     "INFORMACIÓN SOBRE ATLETA \n" +
@@ -251,6 +274,6 @@ public class Participante implements Serializable{
         // Field comparaison
         Participante participante = (Participante) obj;
         return
-                Objects.equals(this.getTiempoCorrecto(), participante.getTiempoCorrecto());
+                Objects.equals(this.getDorsal(), participante.getDorsal());
     }
 }

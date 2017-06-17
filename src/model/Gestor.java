@@ -11,9 +11,13 @@ import java.util.Iterator;
  */
 public class Gestor {
     private ArrayList<Participante> participantes;
+    private ArrayList<Participante> hombres;
+    private ArrayList<Participante> mujeres;
 
     public Gestor(){
         participantes = new ArrayList<>();
+        hombres = new ArrayList<>();
+        mujeres = new ArrayList<>();
     }
 
     /**
@@ -29,7 +33,16 @@ public class Gestor {
 
         if (participante != null) {
             participantes.add(participante);
-            Collections.sort(participantes,Participante.comparadorPorDorsal);
+            Collections.sort(participantes,Participante.comparadorPorTiempo);
+
+            if (participante.getSexo().equals(Sexo.HOMBRE)){
+                hombres.add(participante);
+                Collections.sort(hombres,Participante.comparadorPorTiempo);
+            } else {
+                mujeres.add(participante);
+                Collections.sort(mujeres,Participante.comparadorPorTiempo);
+            }
+
             guardarParticipantes();
         }
     }
@@ -51,7 +64,7 @@ public class Gestor {
             sexoGenero = Sexo.MUJER;
         }
 
-        Collections.sort(participantes,Participante.comparadorPorDorsal);
+        Collections.sort(participantes,Participante.comparadorPorTiempo);
 
         System.out.println("# Clasificación general " + sexo);
         System.out.println("#POS DORSAL NOMBRE A TIEMPO");
@@ -103,20 +116,28 @@ public class Gestor {
     }
 
     public void obtenerPosicionGeneral(){
-        for (int i = 0; i < participantes.size(); i++) {
-            if (!participantes.get(i).equals(participantes.get(0))) {
-                long tiempoAnterior = participantes.get(0).getTiempoCorrecto().getTime();
-                long tiempoActual = participantes.get(i).getTiempoCorrecto().getTime();
+        obtenerPosicion(participantes);
+    }
+
+    public void obtenerPosicionCategoria() {
+        obtenerPosicion(hombres);
+        obtenerPosicion(mujeres);
+    }
+
+    public void obtenerPosicion(ArrayList<Participante> tipo) {
+        for (int i = 0; i < tipo.size(); i++) {
+            if (!tipo.get(i).equals(tipo.get(0))) {
+                long tiempoAnterior = tipo.get(0).getTiempoCorrecto().getTime();
+                long tiempoActual = tipo.get(i).getTiempoCorrecto().getTime();
                 long diferiencia = tiempoActual - tiempoAnterior;
-
-                System.out.println(diferiencia);
                 Time tiempoCorrecto = new java.sql.Time(diferiencia);
-                System.out.println(tiempoCorrecto);
 
-                participantes.get(i).setPosicionGeneral(tiempoCorrecto);
-                participantes.get(i).setPosicionNumeroGeneral(i+1);
+                System.out.println(tipo.get(i));
+
+                tipo.get(i).setPosicionGeneral(tiempoCorrecto);
+                tipo.get(i).setPosicionNumeroGeneral(i + 1);
             } else {
-                participantes.get(i).setPosicionNumeroGeneral(i+1);
+                tipo.get(i).setPosicionNumeroGeneral(i + 1);
             }
         }
     }
