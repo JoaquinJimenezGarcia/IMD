@@ -103,6 +103,14 @@ public class Participante implements Serializable{
             this.tiempoCorrectoConFecha = formatoTiempo.parse(tiempo);
         } catch (ParseException e) {
             System.out.println("Ha introducido un tiempo incorrecto.");
+        } catch (NullPointerException e) {
+            System.out.println("Introduzca tiempo correcto: ");
+            try {
+                this.tiempoCorrectoConFecha = formatoTiempo.parse(tiempo);
+                setTiempoCorrectoConFecha();
+            } catch (ParseException p) {
+
+            }
         }
 
     }

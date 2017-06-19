@@ -150,7 +150,7 @@ public class GestorApp {
 
         fechaNacimiento = getFechaNacimiento();
 
-        System.out.println("Marca realizada: ");
+        System.out.println("Marca realizada (hh:mm:ss): ");
         marcaRealizada = input.nextLine();
 
         return new Participante(dorsal,sexo, nombreCompleto, nacionalidad, club, fechaNacimiento, marcaRealizada);

@@ -26,24 +26,28 @@ public class Gestor {
      * @param participante
      */
     public void registarAtleta(Participante participante) {
-        if (participantes.contains(participante)) {
-            participante = null;
-            System.out.println("Ya hay un participante con este dorsal");
-        }
-
-        if (participante != null) {
-            participantes.add(participante);
-            Collections.sort(participantes,Participante.comparadorPorTiempo);
-
-            if (participante.getSexo().equals(Sexo.HOMBRE)){
-                hombres.add(participante);
-                Collections.sort(hombres,Participante.comparadorPorTiempo);
-            } else {
-                mujeres.add(participante);
-                Collections.sort(mujeres,Participante.comparadorPorTiempo);
+        try {
+            if (participantes.contains(participante)) {
+                participante = null;
+                System.out.println("Ya hay un participante con este dorsal");
             }
 
-            guardarParticipantes();
+            if (participante != null) {
+                participantes.add(participante);
+                Collections.sort(participantes, Participante.comparadorPorTiempo);
+
+                if (participante.getSexo().equals(Sexo.HOMBRE)) {
+                    hombres.add(participante);
+                    Collections.sort(hombres, Participante.comparadorPorTiempo);
+                } else {
+                    mujeres.add(participante);
+                    Collections.sort(mujeres, Participante.comparadorPorTiempo);
+                }
+
+                guardarParticipantes();
+            }
+        } catch (NullPointerException e) {
+            System.out.println("Ha habido algún problema añadiendo el participante. Asegúrese de que los datos cumplen todas las especificaciones.");
         }
     }
 
