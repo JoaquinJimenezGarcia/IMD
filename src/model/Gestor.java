@@ -90,16 +90,15 @@ public class Gestor {
         }
     }
 
-    public void editarAtleta(int dorsal){
-        Iterator<Participante> itParticipante = participantes.iterator();
+    public Participante transicionCliente(int dorsal){
+        Participante participante = null;
 
-        while (itParticipante.hasNext()) {
-            Participante participante = itParticipante.next();
-
-            if (participante.getDorsal() == dorsal) {
-
+        for (Participante p: participantes) {
+            if (p.getDorsal() == dorsal) {
+                participante = p;
             }
         }
+        return participante;
     }
 
     public String borrarAtleta(int dorsal) {

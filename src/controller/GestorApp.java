@@ -50,7 +50,7 @@ public class GestorApp {
                     break;
                 case 4:
                     if (gestor.longitud() > 0) {
-                        gestor.editarAtleta(getIdentificador());
+                        modificarAtleta();
                     }
                     break;
                 case 5:
@@ -179,6 +179,46 @@ public class GestorApp {
             System.out.println("Introduzca un dorsal correcto");
         }
         return getIdentificador();
+    }
+
+    /**
+     * Modifica un cliente ya existente asignándole unos valores nuevos.
+     *
+     * En caso de que dicho cliente existiera también en alguna otra lista,
+     * también los modifica ahí.
+     */
+    public void modificarAtleta(){
+        Scanner input = new Scanner (System.in);
+        String nacionalidad;
+        String club;
+        int fechaNacimiento;
+        String marcaRealizada;
+        Participante clienteModificado = gestor.transicionCliente(getIdentificador());
+
+        if (clienteModificado!=null) {
+
+            System.out.println("Inserte la nueva nacionalidad (formato de tres letras): ");
+            nacionalidad = input.next();
+
+            input.nextLine();
+
+            System.out.println("Inserte el nuevo club: ");
+            club = input.nextLine();
+
+            fechaNacimiento = getFechaNacimiento();
+
+            System.out.println("Modifique su marca (hh:mm:ss): ");
+            marcaRealizada = input.nextLine();
+
+            clienteModificado.setNacionalidad(nacionalidad);
+            clienteModificado.setClub(club);
+            clienteModificado.setFechaNacimiento(fechaNacimiento);
+            clienteModificado.setTiempo(marcaRealizada);
+
+            gestor.guardarParticipantes();
+        } else {
+            System.out.println("El participante que quiere modificar no existe.");
+        }
     }
 
 }
