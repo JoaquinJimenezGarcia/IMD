@@ -43,8 +43,8 @@ public class GestorApp {
                     break;
                 case 3:
                     if (gestor.longitud() > 0) {
-                        gestor.obtenerPosicionGeneral();
                         gestor.obtenerPosicionCategoria();
+                        gestor.obtenerPosicionGeneral();
                         gestor.consultarAtleta(getIdentificador());
                     }
                     break;
@@ -55,7 +55,7 @@ public class GestorApp {
                     break;
                 case 5:
                     if (gestor.longitud() > 0) {
-                        gestor.borrarAtleta(getIdentificador());
+                        System.out.println(gestor.borrarAtleta(getIdentificador()));
                     }
                     break;
                 default:
@@ -72,7 +72,12 @@ public class GestorApp {
             System.out.println("Introduzca sexo: ");
             System.out.println("1. Hombre");
             System.out.println("2. Mujer");
-            opcion = input.nextInt();
+            try {
+                opcion = input.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Introduzca una opción correcta.");
+                return consultarGenero();
+            }
         } while (opcion!=1 && opcion != 2);
 
         return opcion;
@@ -124,16 +129,13 @@ public class GestorApp {
         int fechaNacimiento;
         String marcaRealizada;
 
-        System.out.println("Introduzca dorsal: ");
-        dorsal = input.nextInt();
+        dorsal = getIdentificador();
 
         if (consultarGenero() ==1){
             sexo = Sexo.HOMBRE;
         } else {
             sexo = Sexo.MUJER;
         }
-
-        input.nextLine();
 
         System.out.println("Inserte el nombre con apellidos: ");
         nombreCompleto = input.nextLine();
@@ -146,10 +148,7 @@ public class GestorApp {
         System.out.println("Inserte el club: ");
         club = input.nextLine();
 
-        System.out.println("Indique el año de nacimiento: ");
-        fechaNacimiento = input.nextInt();
-
-        input.nextLine();
+        fechaNacimiento = getFechaNacimiento();
 
         System.out.println("Marca realizada: ");
         marcaRealizada = input.nextLine();
@@ -158,11 +157,28 @@ public class GestorApp {
 
     }
 
+    private int getFechaNacimiento(){
+        Scanner input = new Scanner(System.in);
+
+        System.out.print("Indique el año de nacimiento: ");
+        try {
+            return input.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("Introduzca un año correcto.");
+        }
+        return getFechaNacimiento();
+    }
+
     private int getIdentificador(){
         Scanner input = new Scanner(System.in);
 
         System.out.print("Dorsal: ");
-        return input.nextInt();
+        try {
+            return input.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("Introduzca un dorsal correcto");
+        }
+        return getIdentificador();
     }
 
 }

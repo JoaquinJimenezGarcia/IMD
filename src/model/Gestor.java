@@ -87,32 +87,34 @@ public class Gestor {
     }
 
     public void editarAtleta(int dorsal){
+        Iterator<Participante> itParticipante = participantes.iterator();
 
+        while (itParticipante.hasNext()) {
+            Participante participante = itParticipante.next();
+
+            if (participante.getDorsal() == dorsal) {
+
+            }
+        }
     }
 
-    public void borrarAtleta(int dorsal) {
+    public String borrarAtleta(int dorsal) {
         Iterator<Participante> itParticipante = participantes.iterator();
 
         while (itParticipante.hasNext()){
             Participante participante = itParticipante.next();
-            String comprobador = null;
 
             try {
                 if (participante.getDorsal() == dorsal) {
                     itParticipante.remove();
                     guardarParticipantes();
-                    comprobador = "";
-                    System.out.println("Participante " + participante.getNombreCompleto() + " borrado con éxito.");
-                }
-
-                if (comprobador == null){
-                    System.out.println("El atleta no existe.");
+                    return "Participante " + participante.getNombreCompleto() + " borrado con éxito.";
                 }
             } catch (NullPointerException e) {
                 System.out.println("El atleta no existe.");
             }
         }
-
+        return "EL atleta no existe";
     }
 
     public void obtenerPosicionGeneral(){
@@ -131,8 +133,6 @@ public class Gestor {
                 long tiempoActual = tipo.get(i).getTiempoCorrecto().getTime();
                 long diferiencia = tiempoActual - tiempoAnterior;
                 Time tiempoCorrecto = new java.sql.Time(diferiencia);
-
-                System.out.println(tipo.get(i));
 
                 tipo.get(i).setPosicionGeneral(tiempoCorrecto);
                 tipo.get(i).setPosicionNumeroGeneral(i + 1);
